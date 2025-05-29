@@ -5,6 +5,7 @@ import com.vishnutechverse.calorietracker.dto.AuthResponse;
 import com.vishnutechverse.calorietracker.entity.User;
 import com.vishnutechverse.calorietracker.repository.UserRepository;
 import com.vishnutechverse.calorietracker.util.JwtUtil;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,7 +28,7 @@ public class AuthController {
 
     // POST /api/auth/register
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody AuthRequest request) {
+    public ResponseEntity<String> registerUser(@RequestBody @Valid  AuthRequest request) {
         Optional<User> existingUser = userRepository.findByUsername(request.getUsername());
 
         if (existingUser.isPresent()) {
